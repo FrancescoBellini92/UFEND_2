@@ -57,13 +57,29 @@ main {
 
 section {
     position: relative;
-    min-height: 80vh;
 }
 
 a.your-active-class {
     color: red;
 }
 
+.scroll-to-top {
+    position: sticky;
+    top: 95vh;
+    float: right;
+    z-index: 99;
+}
+.scroll-to-top__button {
+    visibility: hidden;
+}
+
+.hidden {
+    visibility: hidden !important;
+}
+
+.collapsed {
+  transform: scaleY(0);
+}
 
 /* ---- Module Rules ---- */
 
