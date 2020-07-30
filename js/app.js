@@ -75,7 +75,7 @@ function main() {
       hide(scrollTopButton);
       sections.forEach((section) => {
         const sectionHeigth = getHeigthFromTopViewport(section);
-        if (sectionHeigth <= 100 && sectionHeigth >= -100) {
+        if (sectionHeigth <= 50 && sectionHeigth >= -50) {
           applyActiveClass(section);
         }
       });
@@ -108,9 +108,10 @@ function main() {
       });
     });
 
-    sections.forEach((section) => {
-      section.addEventListener('click', () => {
-        section.classList.toggle('collapsed');
+    $('.collapse').forEach((button) => {
+      button.addEventListener('click', () => {
+        const collapsable = button.nextElementSibling;
+        collapsable.classList.toggle('open');
       });
     });
   }
