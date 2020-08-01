@@ -24,16 +24,12 @@ function main() {
   }
 
   function applyActiveClass(targetSection) {
-    if (!hasClass(targetSection, 'your-active-class')) {
-      sections.forEach((section) =>
-        section.classList.remove('your-active-class')
-      );
-      targetSection.classList.add('your-active-class');
+    if (!hasClass(targetSection, 'active')) {
+      sections.forEach((section) => section.classList.remove('active'));
+      targetSection.classList.add('active');
       const targetAnchor = $(`a[href="#${targetSection.id}"]`);
-      anchors.forEach((section) =>
-        section.classList.remove('your-active-class')
-      );
-      targetAnchor.classList.add('your-active-class');
+      anchors.forEach((section) => section.classList.remove('active'));
+      targetAnchor.classList.add('active');
     }
   }
 
@@ -62,7 +58,7 @@ function main() {
       const anchorText = section.attributes['data-nav'].textContent;
       const anchorRef = section.id;
 
-      listChild.innerHTML = `<a href="#${anchorRef}">${anchorText}</a>`;
+      listChild.innerHTML = `<a class="menu__link" href="#${anchorRef}">${anchorText}</a>`;
 
       domFragment.appendChild(listChild);
     }
@@ -90,15 +86,20 @@ function main() {
 
   function addOnClickHandler() {
     // using event delegation to avoid attaching too many handlers
-    navbarList.addEventListener('click', (event) => {
+    navbarList.addEventListener('click', function(event) {
+      // using a non arrow function to bint "this" to the element
+      this.parentElement.classList.remove('open');
       event.preventDefault();
-      const anchorRef = event.target.attributes.href.value;
-      const targetSection = $(anchorRef);
-      const yCoord = getHeigthFromTopViewport(targetSection);
-      window.scrollTo({
-        top: window.pageYOffset + yCoord,
-        behavior: 'smooth'
-      });
+      const target = event.target;
+      if (target.nodeName === 'A') {
+        const anchorRef = target.attributes.href.value;
+        const targetSection = $(anchorRef);
+        const yCoord = getHeigthFromTopViewport(targetSection);
+        window.scrollTo({
+          top: window.pageYOffset + yCoord,
+          behavior: 'smooth'
+        });
+      }
     });
 
     scrollTopButton.addEventListener('click', () => {
@@ -115,12 +116,13 @@ function main() {
       });
     });
   }
+
   return () => {
     populateNavbarList();
-    anchors = $('a');
+    anchors = $('a'); // update the anchors
     addOnScrollHandler();
     addOnClickHandler();
-  }
+  };
 }
 
 // ################ //
