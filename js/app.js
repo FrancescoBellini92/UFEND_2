@@ -4,6 +4,7 @@ function main() {
   const navbarList = $('#navbar__list');
   const sections = $('section');
   const scrollTopButton = $('#scroll-top-button');
+  const mediumBreakpoint = 768;
   let anchors;
   let updateUIOnScrollTimeout;
   // ################ //
@@ -67,7 +68,9 @@ function main() {
   function addOnScrollHandler() {
     window.addEventListener('scroll', () => {
       clearInterval(updateUIOnScrollTimeout);
-      hide(navbarList);
+      if (window.innerWidth > mediumBreakpoint) {
+        hide(navbarList);
+      }
       hide(scrollTopButton);
       sections.forEach((section) => {
         const sectionHeigth = getHeigthFromTopViewport(section);
