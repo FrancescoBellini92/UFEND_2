@@ -1,0 +1,9 @@
+main {
+  margin: 10vh 1em 10vh;
+}
+
+.main__header {
+  background-color: transparent;
+  min-height: 40vh;
+  padding-top: 3em;
+}

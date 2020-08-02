@@ -1,0 +1,6 @@
+.scroll-to-top {
+  position: sticky;
+  top: 90vh;
+  z-index: 99;
+  float: right;
+}

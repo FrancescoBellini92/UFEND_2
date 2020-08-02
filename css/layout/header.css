@@ -1,0 +1,28 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+}
+
+.header .collapse {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-height: 1px;
+    overflow: visible;
+  }
+
+  .header .collapse {
+    display: block;
+  }
+}

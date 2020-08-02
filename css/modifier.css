@@ -1,0 +1,34 @@
+.hidden {
+  visibility: hidden !important;
+}
+
+.collapse-button {
+  width: 100%;
+  max-width: 200px;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.collapsable,
+.collapsable-m {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s ease-out;
+}
+
+.collapsable.open,
+.collapsable-m.open {
+  max-height: 500px;
+}
+
+@media (min-width: 768px) {
+  .collapsable-m {
+    max-height: fit-content;
+    overflow: auto;
+    transition: none;
+  }
+
+  .collapsable-m.open {
+    max-height: fit-content;
+  }
+}

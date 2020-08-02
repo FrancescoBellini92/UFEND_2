@@ -58,7 +58,7 @@ function main() {
       const anchorText = section.attributes['data-nav'].textContent;
       const anchorRef = section.id;
 
-      listChild.innerHTML = `<a class="menu__link" href="#${anchorRef}">${anchorText}</a>`;
+      listChild.innerHTML = `<a class="navbar__menu-link" href="#${anchorRef}">${anchorText}</a>`;
 
       domFragment.appendChild(listChild);
     }
@@ -109,7 +109,7 @@ function main() {
       });
     });
 
-    $('.collapse').forEach((button) => {
+    $('.collapse-button').forEach((button) => {
       button.addEventListener('click', () => {
         const collapsable = button.nextElementSibling;
         collapsable.classList.toggle('open');

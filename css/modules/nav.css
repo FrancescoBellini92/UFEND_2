@@ -1,0 +1,56 @@
+.navbar {
+  margin: 10px;
+}
+
+.navbar ul {
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  list-style-type: none;
+}
+
+.navbar__menu-link {
+  display: block;
+  padding: 1em;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar__menu-link:hover {
+  background: #333;
+  color: #fff;
+  transition: ease 0.3s all;
+}
+
+.navbar__menu-link.active {
+  background: #333;
+  color: #fff;
+}
+
+.navbar .collapse-button {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    margin: 0;
+  }
+
+  .navbar ul {
+    background-color: #000;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .navbar .collapse-button {
+    display: none;
+  }
+}
