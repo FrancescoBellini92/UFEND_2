@@ -5,6 +5,37 @@ function main() {
   const sections = $('section');
   const scrollTopButton = $('#scroll-top-button');
   const mediumBreakpoint = 768;
+
+  const sectionInnerHTML = (sectionTitle) => `
+  <div class="main__container">
+    <h2>${sectionTitle}</h2>
+    <button class="collapse-button">
+      toggle section
+    </button>
+    <div class="collapsable open">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+        fermentum metus faucibus lectus pharetra dapibus. Suspendisse
+        potenti. Aenean aliquam elementum mi, ac euismod augue. Donec eget
+        lacinia ex. Phasellus imperdiet porta orci eget mollis. Sed
+        convallis sollicitudin mauris ac tincidunt. Donec bibendum, nulla
+        eget bibendum consectetur, sem nisi aliquam leo, ut pulvinar quam
+        nunc eu augue. Pellentesque maximus imperdiet elit a pharetra.
+        Duis lectus mi, aliquam in mi quis, aliquam porttitor lacus. Morbi
+        a tincidunt felis. Sed leo nunc, pharetra et elementum non,
+        faucibus vitae elit. Integer nec libero venenatis libero ultricies
+        molestie semper in tellus. Sed congue et odio sed euismod.
+      </p>
+
+      <p>
+        Aliquam a convallis justo. Vivamus venenatis, erat eget pulvinar
+        gravida, ipsum lacus aliquet velit, vel luctus diam ipsum a diam.
+        Cras eu tincidunt arcu, vitae rhoncus purus. Vestibulum fermentum
+        consectetur porttitor. Suspendisse imperdiet porttitor tortor,
+        eget elementum tortor mollis non.
+      </p>
+    </div>
+  </div>`;
   let anchors;
   let updateUIOnScrollTimeout;
   // ################ //
@@ -65,6 +96,14 @@ function main() {
     }
   }
 
+  function populateSections() {
+    let sectionCounter = 1;
+    sections.forEach((section) => {
+      section.innerHTML = sectionInnerHTML(`Section ${sectionCounter}`);
+      sectionCounter++;
+    });
+  }
+
   function addOnScrollHandler() {
     window.addEventListener('scroll', () => {
       clearInterval(updateUIOnScrollTimeout);
@@ -89,7 +128,7 @@ function main() {
 
   function addOnClickHandler() {
     // using event delegation to avoid attaching too many handlers
-    navbarList.addEventListener('click', function(event) {
+    navbarList.addEventListener('click', function (event) {
       // using a non arrow function to bint "this" to the element
       this.parentElement.classList.remove('open');
       event.preventDefault();
@@ -123,6 +162,7 @@ function main() {
   return () => {
     populateNavbarList();
     anchors = $('a'); // update the anchors
+    populateSections();
     addOnScrollHandler();
     addOnClickHandler();
   };

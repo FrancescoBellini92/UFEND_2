@@ -14,7 +14,14 @@ Moreovover, a main closure was provided to ensure variables encapsulation.
 Project is deployed at https://francescobellini92.github.io/UFEND_2/
 
 #
+## Dependecies
+ - eslint and related packages
 
+#
+## How to run 
+ No particular method is required: just open index.html in your browser
+
+#
 ## Credits
 
 HTML and CSS code is a modified version of the templates provided by Udacity
