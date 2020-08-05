@@ -125,9 +125,7 @@ function main() {
   function addOnScrollHandler() {
     window.addEventListener('scroll', () => {
       clearInterval(updateUIOnScrollTimeout);
-      if (window.innerWidth > mediumBreakpoint) {
-        hide(navbarList);
-      }
+      hide(navbarList);
       hide(scrollTopButton);
       sections.forEach((section) => {
         const sectionHeigth = getHeigthFromTopViewport(section);
