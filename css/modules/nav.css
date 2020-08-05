@@ -24,12 +24,6 @@
   color: #fff;
 }
 
-.navbar__menu-link:hover {
-  background: #333;
-  color: #fff;
-  transition: ease 0.3s all;
-}
-
 .navbar__menu-link.active {
   background: #333;
   color: #fff;

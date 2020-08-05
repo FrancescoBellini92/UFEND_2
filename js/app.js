@@ -65,6 +65,24 @@ function main() {
     }
   }
 
+  function manageCollapsable(collapsable) {
+    if (hasClass(collapsable, 'open')) {
+      collapsable.classList.remove('open');
+      collapsable.style.maxHeight = '0';
+      return;
+    }
+    let maxHeight = collapsable.style.maxHeight;
+    switch (maxHeight) {
+      case '':
+      case '0px':
+        maxHeight = collapsable.scrollHeight + 'px';
+        break;
+      default:
+        maxHeight = '0';
+    }
+    collapsable.style.maxHeight = maxHeight;
+  }
+
   function hide(element) {
     element.classList.add('hidden');
   }
@@ -90,7 +108,7 @@ function main() {
       const anchorText = section.attributes['data-nav'].textContent;
       const anchorRef = section.id;
 
-      listChild.innerHTML = `<a class="navbar__menu-link" href="#${anchorRef}">${anchorText}</a>`;
+      listChild.innerHTML = `<a class="navbar__menu-link hoverable" href="#${anchorRef}">${anchorText}</a>`;
 
       domFragment.appendChild(listChild);
     }
@@ -130,7 +148,9 @@ function main() {
     // using event delegation to avoid attaching too many handlers
     navbarList.addEventListener('click', function (event) {
       // using a non arrow function to bint "this" to the element
-      this.parentElement.classList.remove('open');
+      if (window.innerWidth < mediumBreakpoint) {
+        manageCollapsable(this.parentElement);
+      }
       event.preventDefault();
       const target = event.target;
       if (target.nodeName === 'A') {
@@ -154,7 +174,8 @@ function main() {
     $('.collapse-button').forEach((button) => {
       button.addEventListener('click', () => {
         const collapsable = button.nextElementSibling;
-        collapsable.classList.toggle('open');
+        manageCollapsable(collapsable);
+        
       });
     });
   }

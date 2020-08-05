@@ -1,5 +1,15 @@
 .hidden {
-  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.hiddennable {
+  transition: opacity 0.2s ease-out;
+}
+
+.hoverable:hover {
+  background: #333;
+  color: #fff;
+  transition: ease 0.3s all;
 }
 
 .collapse-button {
@@ -18,7 +28,7 @@
 
 .collapsable.open,
 .collapsable-m.open {
-  max-height: 500px;
+  max-height: 1000px;
 }
 
 @media (min-width: 768px) {

@@ -40,7 +40,6 @@ section:nth-of-type(even) .main__container::before {
     rgba(255, 255, 255, 0.2) 100%
   );
   position: absolute;
-  top: 3em;
   right: 3em;
   z-index: -5;
   width: 10vh;
