@@ -59,7 +59,6 @@ section:nth-of-type(3n) .main__container::after {
   );
   position: absolute;
   right: 0;
-  bottom: 0;
   z-index: -5;
   width: 10vh;
   height: 10vh;
@@ -78,7 +77,6 @@ section:nth-of-type(3n + 1) .main__container::after {
   );
   position: absolute;
   right: 20vw;
-  bottom: -5em;
   z-index: -5;
   width: 15vh;
   height: 15vh;
@@ -111,9 +109,9 @@ section.active .main__container::after {
 /* Section Active Styles Keyframe Animations */
 @keyframes rotate {
   from {
-    transform: rotate(0deg) translate(-1em) rotate(0deg);
+    transform: rotate(0deg) translate(-1em) ;
   }
   to {
-    transform: rotate(360deg) translate(-1em) rotate(-360deg);
+    transform: rotate(360deg) translate(-1em) ;
   }
 }
