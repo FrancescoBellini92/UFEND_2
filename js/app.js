@@ -173,7 +173,6 @@ function main() {
       button.addEventListener('click', () => {
         const collapsable = button.nextElementSibling;
         manageCollapsable(collapsable);
-        
       });
     });
   }
