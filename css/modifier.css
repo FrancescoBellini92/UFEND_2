@@ -6,10 +6,13 @@
   transition: opacity 0.2s ease-out;
 }
 
-.hoverable:hover {
-  background: #333;
-  color: #fff;
-  transition: ease 0.3s all;
+@media (min-width: 768px) {
+  .hoverable:hover {
+    background: #333;
+    color: #fff;
+    transition: ease 0.3s all;
+  }
+
 }
 
 .collapse-button {

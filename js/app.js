@@ -125,7 +125,9 @@ function main() {
   function addOnScrollHandler() {
     window.addEventListener('scroll', () => {
       clearInterval(updateUIOnScrollTimeout);
-      hide(navbarList);
+      if (visualViewport.width >= mediumBreakpoint) {
+        hide(navbarList);
+      }
       hide(scrollTopButton);
       sections.forEach((section) => {
         const sectionHeigth = getHeigthFromTopViewport(section);
@@ -138,7 +140,7 @@ function main() {
         if (scrolledBelowPageFold()) {
           show(scrollTopButton);
         }
-      }, 100);
+      }, 200);
     });
   }
 
@@ -146,12 +148,12 @@ function main() {
     // using event delegation to avoid attaching too many handlers
     navbarList.addEventListener('click', function (event) {
       // using a non arrow function to bint "this" to the element
-      if (window.innerWidth < mediumBreakpoint) {
-        manageCollapsable(this.parentElement);
-      }
       event.preventDefault();
       const target = event.target;
       if (target.nodeName === 'A') {
+        if (hasClass(target, 'active') && visualViewport.width < mediumBreakpoint) { // collapse if already on desired section
+          manageCollapsable(this.parentElement);
+        }
         const anchorRef = target.attributes.href.value;
         const targetSection = $(anchorRef);
         const yCoord = getHeigthFromTopViewport(targetSection);
