@@ -104,6 +104,7 @@ section.active .main__container::before {
 section.active .main__container::after {
   opacity: 1;
   animation: rotate 5s linear 0s infinite forwards reverse;
+  margin: 0 50px;
 }
 
 /* Section Active Styles Keyframe Animations */
