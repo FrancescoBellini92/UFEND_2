@@ -1,12 +1,10 @@
 function main() {
-  // ################ //
-
   const navbarList = $('#navbar__list');
   const sections = $('section');
   const scrollTopButton = $('#scroll-top-button');
   const mediumBreakpoint = 768;
 
-  const sectionInnerHTML = (sectionTitle) => `
+  const getSectionInnerHTML = (sectionTitle) => `
   <div class="main__container">
     <h2>${sectionTitle}</h2>
     <button class="collapse-button">
@@ -36,38 +34,56 @@ function main() {
       </p>
     </div>
   </div>`;
+
   let anchors;
   let updateUIOnScrollTimeout;
-  // ################ //
 
+  // currying native methods for sake of simplicity
   function $(selector) {
-    if (selector.includes('#')) {
-      return document.querySelector(selector);
-    }
-    return document.querySelectorAll(selector);
+    return selector.includes('#') ? document.querySelector(selector) : document.querySelectorAll(selector);
   }
 
-  function hasClass(element, className) {
+  function hasClass(className, element) {
     return element.className.includes(className);
+  }
+
+  function addClass(className, ...elements) {
+    elements.forEach(el => el.classList.add(className));
+  }
+
+  function removeClass(className, ...elements) {
+    elements.forEach(el => el.classList.remove(className));
+  }
+
+  function hide(element) {
+    addClass('hidden', element);
+  }
+
+  function show(element) {
+    removeClass('hidden', element);
   }
 
   function getHeigthFromTopViewport(element) {
     return element.getBoundingClientRect().y;
   }
 
+  function scrolledBelowPageFold() {
+    return visualViewport.pageTop >= visualViewport.height;
+  }
+
   function applyActiveClass(targetSection) {
-    if (!hasClass(targetSection, 'active')) {
-      sections.forEach((section) => section.classList.remove('active'));
-      targetSection.classList.add('active');
+    if (!hasClass('active', targetSection)) {
+      removeClass('active', ...sections);
+      addClass('active', targetSection);
       const targetAnchor = $(`a[href="#${targetSection.id}"]`);
-      anchors.forEach((section) => section.classList.remove('active'));
-      targetAnchor.classList.add('active');
+      removeClass('active', ...anchors);
+      addClass('active', targetAnchor);
     }
   }
 
   function manageCollapsable(collapsable) {
-    if (hasClass(collapsable, 'open')) {
-      collapsable.classList.remove('open');
+    if (hasClass('open', collapsable)) {
+      removeClass('open', collapsable);
       collapsable.style.maxHeight = '0';
       return;
     }
@@ -83,22 +99,8 @@ function main() {
     collapsable.style.maxHeight = maxHeight;
   }
 
-  function hide(element) {
-    element.classList.add('hidden');
-  }
-
-  function show(element) {
-    element.classList.remove('hidden');
-  }
-
-  function scrolledBelowPageFold() {
-    return visualViewport.pageTop >= visualViewport.height;
-  }
-
-  // ################ //
-
   function populateNavbarList() {
-    const domFragment = document.createDocumentFragment();
+    const domFragment = document.createDocumentFragment(); // using a fragment to avoid creating a container element
     sections.forEach((section) => populateFragment(section));
     navbarList.appendChild(domFragment);
 
@@ -110,14 +112,14 @@ function main() {
 
       listChild.innerHTML = `<a class="navbar__menu-link hoverable" href="#${anchorRef}">${anchorText}</a>`;
 
-      domFragment.appendChild(listChild);
+      domFragment.appendChild(listChild); // elements created and appended to fragment to minimize DOM manipulation
     }
   }
 
   function populateSections() {
     let sectionCounter = 1;
     sections.forEach((section) => {
-      section.innerHTML = sectionInnerHTML(`Section ${sectionCounter}`);
+      section.innerHTML = getSectionInnerHTML(`Section ${sectionCounter}`);
       sectionCounter++;
     });
   }
@@ -131,7 +133,7 @@ function main() {
       hide(scrollTopButton);
       sections.forEach((section) => {
         const sectionHeigth = getHeigthFromTopViewport(section);
-        if (sectionHeigth <= 50 && sectionHeigth >= -50) {
+        if (sectionHeigth <= 100 && sectionHeigth >= -100) {
           applyActiveClass(section);
         }
       });
@@ -151,7 +153,7 @@ function main() {
       event.preventDefault();
       const target = event.target;
       if (target.nodeName === 'A') {
-        if (hasClass(target, 'active') && visualViewport.width < mediumBreakpoint) { // collapse if already on desired section
+        if (hasClass('active', target) && visualViewport.width < mediumBreakpoint) { // collapse if already on desired section
           manageCollapsable(this.parentElement);
         }
         const anchorRef = target.attributes.href.value;
@@ -187,8 +189,6 @@ function main() {
     addOnClickHandler();
   };
 }
-
-// ################ //
 
 window.addEventListener('load', () => {
   main()();
