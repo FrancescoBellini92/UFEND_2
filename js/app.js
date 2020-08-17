@@ -190,6 +190,6 @@ function main() {
   };
 }
 
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   main()();
 });
