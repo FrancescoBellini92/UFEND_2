@@ -1,5 +1,7 @@
 ## Udacity Front End ND project 2
 
+Second project for the Udacity Front End Nanodegree: this project required adding dynamic behavior to a web page with Javascript.
+
 This repo contains a landing page with dynamic behaviour added with Javascript
 
 BEM methodoloy has been applied to promote DRY code and style encapsulation, and a mobile-first approach was followed to good cross-device user experience.
