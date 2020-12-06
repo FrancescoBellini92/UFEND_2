@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
           faucibus vitae elit. Integer nec libero venenatis libero ultricies
           molestie semper in tellus. Sed congue et odio sed euismod.
         </p>
-  
+
         <p>
           Aliquam a convallis justo. Vivamus venenatis, erat eget pulvinar
           gravida, ipsum lacus aliquet velit, vel luctus diam ipsum a diam.
@@ -129,16 +129,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function addOnScrollHandler() {
       window.addEventListener('scroll', () => {
         clearInterval(updateUIOnScrollTimeout);
+        const sectionsHeight = [];
+        sections.forEach(section => {
+          const sectionHeigth = getHeigthFromTopViewport(section);
+          sectionsHeight.push(sectionHeigth);
+        });
+
         if (visualViewport.width >= mediumBreakpoint) {
           hide(navbarList);
         }
         hide(scrollTopButton);
-        sections.forEach((section) => {
-          const sectionHeigth = getHeigthFromTopViewport(section);
+
+        sections.forEach((section, i) => {
+          const sectionHeigth = sectionsHeight[i];
           if (sectionHeigth <= 100 && sectionHeigth >= -100) {
             applyActiveClass(section);
           }
         });
+
         updateUIOnScrollTimeout = setTimeout(() => {
           show(navbarList);
           if (scrolledBelowPageFold()) {
