@@ -1,4 +1,6 @@
-# Udacity Front End ND project 2
+## Udacity Front End ND project 2
+
+Second project for the Udacity Front End Nanodegree: this project required adding dynamic behavior to a web page with Javascript.
 
 This repo contains a landing page with dynamic behaviour added with Javascript
 
@@ -10,10 +12,14 @@ On the Javascript side, measures have been taken to keep performance overhead lo
 
 A main closure was provided to ensure variables encapsulation.
 
-
 Project is deployed at https://francescobellini92.github.io/UFEND_2/
 
-#
+## Dependencies
+Please refer to package.json for dependencies
+
+## How to run
+This is a very simple project: it will be sufficient to clone the repo and open the page with your browser
+
 ## Credits
 
 HTML and CSS code is a modified version of the templates provided by Udacity
